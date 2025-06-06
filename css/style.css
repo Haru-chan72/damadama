@@ -1,0 +1,472 @@
+@font-face {
+    font-family: "felt";
+    src: url("../font/f_feltpen04.otf")format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "kokutetu";
+    src: url("../font/JNRfont_s\ \(1\).ttf")format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "dot";
+    src: url("../font/EnkaDotGothic24.ttf")format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "jk";
+    src: url("../font/JK-Maru-Gothic-M.otf")format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "kikai";
+    src: url("../font/KikaiChokokuJIS-Md.otf")format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "dot2";
+    src: url("../font/madoufmg.ttf")format("truetype");
+    font-display: swap;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: felt,sans-serif;
+    line-height: 1.8;
+    background-color: #ffffff;
+    color: #33badb;
+    padding: 20px;
+
+     /* --- ↓ここからグリッド背景の追加・変更↓ --- */
+    /* 2つのグラデーションで格子模様を作成 */
+    background-image:
+        linear-gradient(to right, #09c75834 1px, transparent 1px), /* 縦線 */
+        linear-gradient(to bottom,  #09c75834   1px, transparent 1px); /* 横線 */
+    /* グリッドのサイズ（マスの大きさ） */
+    background-size: 40px 40px; /* 例: 50px四方のグリッド */
+    /* グリッドの色と透明度（背景色に馴染むように） */
+    background-color: #ffffff; /* ボディのベース背景色 */
+    z-index: -1;
+
+    /* アニメーション設定 */
+    animation: grid-scroll 10s linear infinite; /* 60秒かけて横にスクロール (ゆったり) */
+    /* --- ↑ここまでグリッド背景の追加・変更↑ --- */
+
+    position: relative;
+    z-index: 0;
+    overflow-x: hidden; /* 横スクロールバーが出ないように */
+    
+}
+
+/* --- ↓ここからアニメーションの追加↓ --- */
+@keyframes grid-scroll {
+    0% {
+        background-position: 0 0; /* 開始位置 */
+    }
+    100% {
+        background-position: -40px 0; /* グリッドの幅分だけ左に移動してループ */
+    }
+}
+
+/* ヘッダーやフッター、メインコンテンツの背景色を白などにして、グリッドの上にコンテンツが乗っているように見せる */
+.site-header, .main-content .post-card, .article-detail .article-body {
+    background-color: #ffffff85; 
+    border-radius: 8px;/* 白背景に少し透明度を加える */
+    box-shadow: 0 7px 1px rgba(255, 255, 255, 0.151);
+    /* backdrop-filter: blur(2px); /* 背景のグリッドを少しぼかす効果（任意） */
+}
+
+
+
+a {
+    color: #a17272;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+}
+
+a:hover {
+    color: #d8a089;
+    text-decoration: none;
+    transform: translateY(-2px);
+}
+
+.site-header {
+    text-align: center;
+    padding: 20px 20px;
+    margin-bottom: 40px;
+    max-width: 300px;
+}
+
+.site-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.site-header p {
+    font-size: 1.1em;
+    color: #a19393;
+}
+
+
+.main-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.post-card {
+    flex-basis: 300px;
+    flex-grow: 1;
+    max-width: calc(50%-15px);
+    max-width: 230px;
+    border-radius: 6px;
+    margin-bottom: 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    min-height: 150px;
+    position: relative;
+
+        opacity: 0; /* 初期状態は非表示 */
+    animation: fadeInScale 0.6s ease-out forwards; /* アニメーション適用 */
+    /* forwards: アニメーション終了後も最終状態を維持 */
+    
+    /* カードが順番に表示されるような遅延 */
+    /* JavaScriptで動的に遅延を設定することも可能ですが、ここではCSSで一括適用 */
+    /* 例えば、N番目のカードにだけ適用するなどの工夫が必要になる場合もあります。 */
+    /* .post-card:nth-child(1) { animation-delay: 0.1s; } */
+    /* .post-card:nth-child(2) { animation-delay: 0.2s; } */
+    /* ... など */
+
+    /* 以下のtransitionはホバーエフェクト用なのでそのまま */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 1px rgba(146, 115, 115, 0.151);
+}
+
+.post-card-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    padding: 20px;
+}
+
+.post-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: #8a7979;
+}
+
+.post-meta span + span::before {
+    content: "|";
+}
+
+
+.article-detail .article-header {
+    text-align: center;
+    margin-bottom: 40px;
+    
+}
+
+.article-detail .article-header h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.article-detail .article-header .article-meta {
+    color: #94aab4;
+    font-size: 1em;
+}
+
+.article-detail .article-body {
+    font-size: 1.1em;
+    font-family: kikai;
+    border-radius: 8px;
+    padding: 40px;
+    line-height: 2;
+    color: #70a3aa;
+    max-width: 500px;
+    margin: 0 auto;
+
+    opacity: 0; /* 初期状態は非表示 */
+    animation: fadeIn 0.4s ease-out forwards; /* フェードインアニメーション適用 */
+}
+
+.article-detail .article-body p {
+    margin-bottom: 1.5em;
+}
+
+img { max-width: 100%; height: auto; display: block; margin: 20px auto; }
+
+.read-more {
+    color: #94aab4;
+}
+
+.article-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.article-list h2 {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    text-align: center;
+    width: 100%;
+}
+
+
+/* css/style.css */
+
+/* BGMプレイヤーコンテナのスタイル */
+.bgm-player {
+    text-align: center;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.8); /* 半透明の背景 */
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    max-width: 300px; /* 幅を制限 */
+    margin-left: auto;
+    margin-right: auto; /* 中央寄せ */
+    display: flex; /* ボタンとスライダーを横並びに */
+    align-items: center; /* 縦方向中央揃え */
+    justify-content: center; /* 横方向中央揃え */
+    gap: 10px; /* 要素間の隙間 */
+    font-size: 0.9em;
+    color: #555;
+}
+
+/* 再生/一時停止ボタンのスタイル */
+.play-pause-btn {
+    font-family: kikai;
+    background-color: #e37559;
+; /* アクセントカラー */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.play-pause-btn:hover {
+    background-color: #da5b3b
+; /* ホバー時の色 */
+}
+
+/* 音量スライダーのスタイル（ブラウザによって見た目が異なります） */
+#volumeSlider {
+    width: 100px; /* スライダーの幅 */
+    -webkit-appearance: none; /* デフォルトのスタイルを無効化（Chrome, Safari） */
+    appearance: none;
+    height: 5px; /* スライダーの高さ */
+    background: #ccc;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+    border-radius: 5px;
+}
+
+#volumeSlider:hover {
+    opacity: 1;
+}
+
+/* スライダーのつまみのスタイル（ブラウザベンダープレフィックスが必要） */
+#volumeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 40%;
+    background: #e37559
+; /* アクセントカラー */
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+#volumeSlider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #90b6aa;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0,0,0,0.3);
+}
+
+/* css/style.css */
+
+/* カーソルパーティクルのスタイル */
+.cursor-particle {
+    position: fixed; /* 画面に固定して表示 */
+    pointer-events: none; /* カーソル下の要素のクリックを邪魔しないように */
+    border-radius: 10%; /* 円形にする */
+    opacity: 1; /* 初期は完全に表示 */
+    transform: scale(1); /* 初期サイズ */
+    transition: opacity 0.4s ease-out, transform 0.3s ease-out; /* 透明度とサイズ変化をアニメーション */
+    z-index: 9999; /* 他の要素より手前に表示 */
+    /* 背景色はJavaScriptでランダムに設定される */
+}
+
+/* フェードインとわずかな拡大 */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.98); /* 少し小さめから開始 */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1); /* 元のサイズに */
+    }
+}
+
+/* フェードイン（拡大なし） */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* css/style.css */
+
+/* --- 常に表示されるメニューボタン --- */
+.fixed-menu-button-container {
+    position: fixed; /* 画面に固定 */
+    bottom: 40px; /* 画面下からの距離 */
+    right: 30px; /* 画面右からの距離 */
+    z-index: 1000; /* 他のコンテンツより常に手前に表示 */
+}
+
+.menu-button {
+    font-family: kikai;
+    background-color: #ffffff23; /* アクセントカラー */
+    color: rgb(63, 145, 145);
+    border: none;
+    border-radius: 5%; /* 円形にする */
+    width: 60px; /* ボタンの幅 */
+    height: 60px; /* ボタンの高さ */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9em;
+    cursor: pointer;
+    box-shadow: 0 4px 4px rgba(46, 78, 100, 0.2); /* 影で浮いている感を出す */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.menu-button:hover {
+    background-color: #75d6e770;
+    color: #ffffff;
+    transform: translateY(-2px); /* ホバーで少し浮き上がる */
+}
+
+/* --- グローバルナビゲーション（メニュー本体）の変更点 --- */
+.global-nav {
+    background-color: rgba(255, 255, 255, 0.98);
+    border-radius: 8px; /* 角丸は好みで調整 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* 影を調整 */
+    padding: 20px 25px; /* 内側の余白を調整 */
+
+    /* ↓↓ ここを大きく変更 ↓↓ */
+    position: fixed; /* 画面に固定 */
+    top: 70px; /* 画面の最上部から */
+    right: -300px; /* 画面外の右側に隠す（メニューの幅に合わせて調整） */
+    width: 140px; /* メニューの幅を固定 */
+    height: 70vh; /* 画面の高さいっぱいに広げる */
+    overflow-y: auto; /* メニュー内容が長い場合にスクロール可能にする */
+    /* ↓↑ ここまで大きく変更 ↑↓ */
+
+    z-index: 990; /* ボタンよりは下、コンテンツよりは上 */
+    
+    opacity: 0; /* 初期状態は完全に透明 */
+    /* スライドとフェードインのアニメーション */
+    transition: right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), /* スライドのイージング */
+                opacity 0.5s ease-out; /* フェードインのイージング */
+}
+
+/* メニューが表示された時のスタイル */
+.global-nav.is-active {
+    right: 0; /* 画面の右端にスライドして表示 */
+    opacity: 1; /* フェードインして完全に表示 */
+}
+
+/* --- グローバルナビゲーションのリストスタイル --- */
+.global-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.global-nav li {
+    margin-bottom: 15px; /* リストアイテム間の余白を調整 */
+}
+
+.global-nav li:last-child {
+    margin-bottom: 0;
+}
+
+.global-nav a {
+    text-decoration: none;
+    color: #e37559;
+    font-weight: bold;
+    padding: 8px 0; /* クリック領域を広げる */
+    display: block;
+    text-align: left; /* メニューリンクを左寄せに */
+    transition: color 0.2s ease;
+}
+
+.global-nav a:hover {
+    color: #47afbd;
+}
+
+/* --- メニューが開いたときにメインコンテンツを暗くする効果 (オプション) --- */
+/* body.menu-open {
+    overflow: hidden; /* スクロールを一時的に停止 */
+/* } */
+
+/* body.menu-open::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒いオーバーレイ */
+/* z-index: 980; /* メニューの下、他のコンテンツの上 */
+/* opacity: 0;
+/* transition: opacity 0.5s ease-out;
+/* } */
+
+/* body.menu-open::after {
+/* opacity: 1;
+/* } */

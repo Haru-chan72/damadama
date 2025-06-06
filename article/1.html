@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>感想</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <main class="main-content article-detail">
+        <article>
+            <div class="article-header">
+                <h2>ホームページについて</h2>
+                <p class="article-meta">
+                    <span class="post-date">2025-6-5</span>
+                    <span class="anime-title">おしゃべり</span>
+                </p>
+            </div>
+            
+        <div class="bdm-player">
+                <audio id="myBGM" src="../audio/3ds-001.mp3" loop></audio>
+                <button id="playPauseBtn" class="play-pause-btn">BGM再生</button>
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+        </div>
+        <script src="../js/bgm-player.js"></script>
+    
+            <div class="article-body">
+                <p>ホームページを作るのは実はこれで３回目です。カッコよく決めるよりはゆるい方がいいかな、と思ってこんな感じにしてみました。読みやすいでしょうか。</p>
+                <p>ここでは主に、感じたことや考えたことを適当に書いていこうと思います。あんまり人の多いところだとやっぱりどこかしら緊張するので、こういう自分だけのホームページで語ってみようという試みです。まあこれもすぐ飽きる可能性が高いです。ゆるくやります。</p>
+                <p>そしてもうお気づきかもしれませんが、なんとなくでBGM再生ボタンを付けてみました。完全に趣味です。こういう電子空間っぽいBGMと一緒に記事を見たらなんかこう...それっぽくない！？</p>
+                <p>こんな感じで時々変な改造（？）がされるかもですが、ホームページをよろしくお願いします。</p>
+            </div>
+        </article>
+        <p style="text-align: center; margin-top: 40px;">
+            <a href="../index.html" class="read-more">&lt; 記事一覧へ戻る</a>
+        </p>
+    </main>
+    <script src="../js/cursor-effect.js"></script>
+    <script src="../js/menu.js"></script>
+
+    <div class="fixed-menu-button-container">
+        <button id="menuButton" class="menu-button">◁</button>
+        <nav id="globalNav" class="global-nav">
+            <ul>
+                <li><a href="../index.html">ホーム</a></li>
+                <li><a href="#about">このサイトについて</a></li> </ul>
+        </nav>
+    </div>
+
+</body>
+</html>
