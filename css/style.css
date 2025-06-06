@@ -200,6 +200,7 @@ a:hover {
 .article-detail .article-header .article-meta {
     color: #94aab4;
     font-size: 1em;
+
 }
 
 .article-detail .article-body {
@@ -209,7 +210,7 @@ a:hover {
     padding: 40px;
     line-height: 2;
     color: #70a3aa;
-    max-width: 80%;
+    max-width: 90%;
     margin: 0 auto;
 
     opacity: 0; /* 初期状態は非表示 */
@@ -362,19 +363,19 @@ img { max-width: 100%; height: auto; display: block; margin: 20px auto; }
 /* --- 常に表示されるメニューボタン --- */
 .fixed-menu-button-container {
     position: fixed; /* 画面に固定 */
-    bottom: 60px; /* 画面下からの距離 */
-    right: 20px; /* 画面右からの距離 */
+    top: 20px; /* 画面下からの距離 */
+    right: 10px; /* 画面右からの距離 */
     z-index: 1000; /* 他のコンテンツより常に手前に表示 */
 }
 
 .menu-button {
     font-family: kikai;
-    background-color: #ffffff23; /* アクセントカラー */
+    background-color: #ffffff0c; /* アクセントカラー */
     color: rgb(63, 145, 145);
     border: none;
     border-radius: 5%; /* 円形にする */
-    width: 40px; /* ボタンの幅 */
-    height: 40px; /* ボタンの高さ */
+    width: 47px; /* ボタンの幅 */
+    height: 47px; /* ボタンの高さ */
     display: flex;
     justify-content: center;
     align-items: center;
