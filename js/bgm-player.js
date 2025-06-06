@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // 実際に再生されるのはユーザーが再度ボタンをクリックした時になることが多い。
             // もしくは、後述のユーザー操作フラグで対策する。
             isPlaying = true;
-            playPauseBtn.textContent = 'BGM一時停止';
+            playPauseBtn.textContent = 'X';
             // myBGM.play() はDOMContentLoadedで直接呼ばない方が安全
             // ページロード時の自動再生ブロックを考慮し、ユーザーの最初のクリックを待つ。
         }
@@ -37,17 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
     playPauseBtn.addEventListener('click', () => {
         if (isPlaying) {
             myBGM.pause(); // 一時停止
-            playPauseBtn.textContent = 'BGM再生'; // ボタンのテキストを変更
+            playPauseBtn.textContent = '♪'; // ボタンのテキストを変更
         } else {
             // Promiseを返すplay()メソッドは、失敗する可能性があるためcatchでエラーハンドリング
             myBGM.play().then(() => {
                 // 再生成功時
-                playPauseBtn.textContent = 'BGM一時停止';
+                playPauseBtn.textContent = 'X';
             }).catch(error => {
                 // 再生失敗時 (ブラウザの自動再生ポリシーなどでブロックされた場合)
                 console.error("BGMの再生に失敗しました:", error);
                 alert("BGMの再生がブロックされました。ブラウザの自動再生設定をご確認ください。");
-                playPauseBtn.textContent = 'BGM再生'; // ボタンを元に戻す
+                playPauseBtn.textContent = '♪'; // ボタンを元に戻す
             });
         }
         isPlaying = !isPlaying; // フラグを反転
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // BGMが終了したら（loop属性があるので基本はここには来ないが念のため）
     myBGM.addEventListener('ended', () => {
         isPlaying = false;
-        playPauseBtn.textContent = 'BGM再生';
+        playPauseBtn.textContent = '♪';
         // --- ☆追加：終了時も状態を保存（再生停止状態を記録）☆ ---
         saveBGMState();
         // --- ☆ここまで追加☆ ---
